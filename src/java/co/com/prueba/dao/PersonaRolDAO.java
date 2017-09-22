@@ -148,5 +148,10 @@ public class PersonaRolDAO {
             ex.printStackTrace();
         }
     }
+      
+      public String devolver(){
+          System.out.println("Devolver");
+          return "valor";
+      }
     
 }
