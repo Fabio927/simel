@@ -120,5 +120,9 @@ public class PermisoDAO {
         this.hola = hola;
     }
     
+    public String nuevoCampo;
+    
+    public int nuevoValor;
+    
     
 }
