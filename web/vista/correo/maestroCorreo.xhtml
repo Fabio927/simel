@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form>
+                <div align="left">
+                    <!--<p:commandButton value="Nuevo" action="#{maestroCorreoManagedBean.irACrearCorreo()}"></p:commandButton>-->                                                            
+                </div>
+                <br></br>
+            </h:form>
+
+            <h:form id="forma">
+                <p:dataTable id="tbl" var="correo" value="#{maestroCorreoManagedBean.arregloCorreos}" widgetVar="tablaeps"
+                             rows="15" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                             filteredValue="#{maestroCorreoManagedBean.datosFiltrados}" 
+                             rowsPerPageTemplate="10,20,30" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        Listado de Correos
+                    </f:facet>
+
+
+                    <p:column style="width:15px;text-align: center" >
+                        <p:commandLink action="#{maestroCorreoManagedBean.irAConsultarCorreo()}" title="Consultar">                                                
+                            <f:setPropertyActionListener value="#{correo}" target="#{correoManagedBean.correo}" />
+                            <i class="fa fa-check"/>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:column style="width:15px;text-align: center"  rendered="#{menuManagedBean.mostrarEditar}">
+                        <p:commandLink action="#{maestroCorreoManagedBean.irAEditarCorreo()}" title="Editar">                                                
+                            <f:setPropertyActionListener value="#{correo}" target="#{correoManagedBean.correo}" />
+                            <i class="fa fa-edit"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center" rendered="#{menuManagedBean.mostrarEliminar}">
+                        <p:commandLink action="#{maestroCorreoManagedBean.irAEliminarCorreo()}" title="Eliminar">
+                            <f:setPropertyActionListener value="#{correo}" target="#{correoManagedBean.correo}" />
+                            <i class="fa fa-trash-o"/>
+                        </p:commandLink>
+                    </p:column>
+
+
+                    <p:column style="width:32px" exportable="false" visible="false">
+                        <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column style="width:15px; font-size: 14px;"  sortBy="#{correo.idCorreo}">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{correo.idCorreo}" />
+                    </p:column>
+
+                    <p:column style="font-size: 14px;" sortBy="#{correo.asunto}">
+                        <f:facet name="header">
+                            <h:outputText value="Asunto" />
+                        </f:facet>
+                        <h:outputText value="#{correo.asunto}"/>
+                    </p:column>           
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{correo.para}">
+                        <f:facet name="header">
+                            <h:outputText value="Para" />
+                        </f:facet>
+                        <h:outputText value="#{correo.para}"/>
+                    </p:column>            
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{correo.mensaje}">
+                        <f:facet name="header">
+                            <h:outputText value="Mensaje" />
+                        </f:facet>
+                        <h:outputText value="#{correo.mensaje}"/>
+                    </p:column>   
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{correo.persona.correo}">
+                        <f:facet name="header">
+                            <h:outputText value="De" />
+                        </f:facet>
+                        <h:outputText value="#{correo.persona.correo}"/>
+                    </p:column>   
+                    
+                    
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

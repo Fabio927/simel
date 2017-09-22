@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{correoManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Formulario de Envío de Correo" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">                   
+
+                        
+                        
+                         <p:outputLabel value="De "> </p:outputLabel>
+                        <p:selectOneMenu id="combode" value="#{correoManagedBean.personaSelect}" effect="fade" filter="true" filterMatchMode="contains">
+                            <f:selectItems value="#{correoManagedBean.personaList}"/>
+                        </p:selectOneMenu>
+                        <p:message for="combode"> </p:message>
+
+                        <p:outputLabel value="Para"></p:outputLabel>
+                        <p:inputText id="para" value="#{correoManagedBean.correo.para}"  style=" width: 100% "  required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="para"></p:message>
+
+                        <p:outputLabel value="Asunto"></p:outputLabel>
+                        <p:inputText id="asunto" value="#{correoManagedBean.correo.asunto}"  style=" width: 100% " required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="asunto"></p:message>
+                        
+                        <p:outputLabel value="Usuario y Contraseña"></p:outputLabel>
+                        <p:outputLabel id="ac" value="#{correoManagedBean.correo.persona.correo} #{correoManagedBean.correo.persona.clave}"  style=" width: 100% "></p:outputLabel>
+                        <p:message for="ac"></p:message>
+                        
+                        <p:outputLabel value="Mensaje"></p:outputLabel>
+                        <p:textEditor widgetVar="editor2" value="#{correoManagedBean.correo.mensaje}" 
+                                      required="true" requiredMessage="Este campo es requerido" height="300" style="margin-bottom:10px" placeholder="Digita el mensaje">
+                            
+                        </p:textEditor>
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank"> 
+                    <p:commandButton action="#{correoManagedBean.enviarCorreo(correoManagedBean.correo.para, correoManagedBean.correo.asunto, correoManagedBean.correo.mensaje)}" update="forma" value="Enviar"></p:commandButton>
+                    <p:commandButton value="Regresar" immediate="true" action="maestroCorreo"></p:commandButton>
+
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

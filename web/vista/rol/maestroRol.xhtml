@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message"/>
+            <h:form>
+                <div align="left">
+                    <p:commandButton value="Nuevo" action="#{maestroRolManagedBean.irACrearRol()}"></p:commandButton>
+                </div>
+                <br></br>
+            </h:form>
+
+            <h:form id="forma">
+                <p:dataTable id="tbl" var="rol" value="#{maestroRolManagedBean.arregloRol}" widgetVar="tablaeps"
+                             rows="10" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                             rowsPerPageTemplate="10,20,30" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        Listado de Roles
+                    </f:facet>
+
+
+                    <p:column style="width:15px;text-align: center" >
+                        <p:commandLink action="#{maestroRolManagedBean.irAConsultarRol()}" title="Consultar">
+                            <f:setPropertyActionListener value="#{rol}" target="#{rolManagedBean.rol}" />
+                            <i class="fa fa-check"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroRolManagedBean.irAEditarRol()}" title="Modificar">
+                            <f:setPropertyActionListener value="#{rol}" target="#{rolManagedBean.rol}" />
+                            <i class="fa fa-edit"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroRolManagedBean.irAEliminarRol()}" title="Eliminar">
+                            <f:setPropertyActionListener value="#{rol}" target="#{rolManagedBean.rol}" />
+                            <i class="fa fa-trash-o"/>
+                        </p:commandLink>
+                    </p:column>
+
+
+                    <p:column style="width:32px" exportable="false" visible="false">
+                        <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column style="width:15px; font-size: 14px;"  sortBy="#{rol.idRol}">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{rol.idRol}" />
+                    </p:column>
+
+                    <p:column style="font-size: 14px;" sortBy="#{rol.nombreRol}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del Rol" />
+                        </f:facet>
+                        <h:outputText value="#{rol.nombreRol}"/>
+                    </p:column>            
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{rol.descripcionRol}">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción del Rol" />
+                        </f:facet>
+                        <h:outputText value="#{rol.descripcionRol}"/>
+                    </p:column>            
+ 
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

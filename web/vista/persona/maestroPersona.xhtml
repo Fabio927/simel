@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form>
+                <div align="left">
+                    <p:commandButton value="Nuevo" action="#{maestroPersonaManagedBean.irACrearPersona()}"></p:commandButton>                                        
+                </div>
+                <br></br>
+            </h:form>
+
+            <h:form id="forma">
+                <p:dataTable id="tbl" var="persona" value="#{maestroPersonaManagedBean.arregloPersona}" widgetVar="tablaeps"
+                             rows="15" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                             filteredValue="#{maestroPersonaManagedBean.datosFiltrados}" 
+                             rowsPerPageTemplate="10,20,30" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        Listado de Usuarios
+                    </f:facet>
+
+
+                    <p:column style="width:15px;text-align: center" >
+                        <p:commandLink action="#{maestroPersonaManagedBean.irAConsultarPersona()}" title="Consultar">                        
+                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.persona}" />
+                            <i class="fa fa-check"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroPersonaManagedBean.irAEditarPersona()}" title="Modificar">
+                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.persona}" />
+                            <i class="fa fa-edit"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroPersonaManagedBean.irAEliminarPersona()}" title="Eliminar">
+                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.persona}" />
+                            <i class="fa fa-trash-o"/>
+                        </p:commandLink>
+                    </p:column>
+
+
+                    <p:column style="width:32px" exportable="false" visible="false">
+                        <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column style="width:10px; font-size: 14px;"  sortBy="#{persona.idPersona}">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{persona.idPersona}" />
+                    </p:column>
+
+                    <p:column style="width: 100px; font-size: 14px;" sortBy="#{persona.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombres" />
+                        </f:facet>
+                        <h:outputText value="#{persona.nombre}"/>
+                    </p:column>           
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{persona.apellido}">
+                        <f:facet name="header">
+                            <h:outputText value="Apellidos" />
+                        </f:facet>
+                        <h:outputText value="#{persona.apellido}"/>
+                    </p:column>            
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{persona.cargo}">
+                        <f:facet name="header">
+                            <h:outputText value="Cargo" />
+                        </f:facet>
+                        <h:outputText value="#{persona.cargo}"/>
+                    </p:column>   
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{persona.correo}">
+                        <f:facet name="header">
+                            <h:outputText value="Correo Electrónico" />
+                        </f:facet>
+                        <h:outputText value="#{persona.correo}"/>
+                    </p:column>   
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{persona.clave}">
+                        <f:facet name="header">
+                            <h:outputText value="Clave" />
+                        </f:facet>
+                        <h:outputText value="#{persona.clave}"/>
+                    </p:column>    
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

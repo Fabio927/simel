@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{correoManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Formulario de Creación de Correos" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">                   
+                        
+                        <p:outputLabel value="De "> </p:outputLabel>
+                        <p:selectOneMenu id="comboDe" value="#{correoManagedBean.personaSelect}" effect="fade" filter="true" filterMatchMode="contains">
+                            <f:selectItems value="#{correoManagedBean.personaList}"/>
+                        </p:selectOneMenu>
+                        <p:message for="comboDe"> </p:message>
+
+                        <p:outputLabel value="Asunto"></p:outputLabel>
+                        <p:inputText id="asunto" value="#{correoManagedBean.correo.asunto}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="asunto"></p:message>
+
+                        <p:outputLabel value="Para"></p:outputLabel>
+                        <p:inputText id="para" value="#{correoManagedBean.correo.para}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="para"></p:message>
+
+                        <p:outputLabel value="Mensaje "></p:outputLabel>
+                        <p:inputText id="mensaje" value="#{correoManagedBean.correo.mensaje}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="mensaje"></p:message>
+                        
+                    </p:panelGrid>
+                </p:panel>
+
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank"> 
+                    <p:commandButton action="#{correoManagedBean.actualizarCorreo()}" update="forma" value="Guardar"></p:commandButton>
+                    <p:commandButton value="Regresar" immediate="true" action="maestroCorreo"></p:commandButton>
+                    <!--                    immediate="true" puede cancelar el proceso de creacion de usuario y se puede devolver en la pagina. para proceso de guardado-->
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

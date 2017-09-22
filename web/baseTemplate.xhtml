@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <h:outputScript name="spanishLocale.js" library="js"></h:outputScript>
+
+    </h:head>
+    <h:body>
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="estilo.css" />
+        </f:facet>
+        <header>
+            <ui:insert name="header">
+                <ui:include src="header.xhtml" />
+            </ui:insert>
+        </header>
+        <nav>
+            <div id="menu">
+                <ui:insert name="menu">
+                    <ui:include src="menu.xhtml" />
+                </ui:insert>
+            </div>
+        </nav>
+        <section>
+            <div id="cuerpo">
+                <ui:insert name="content" />
+            </div>
+        </section>
+
+
+    </h:body>
+</html>
+
