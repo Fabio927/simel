@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form>
+                <div align="left">
+                    <p:commandButton value="Nuevo" action="#{maestroRolesPermisoManagedBean.irACrearRolesPermiso()}"></p:commandButton>                    
+                </div>
+                <br></br>
+            </h:form>
+<!--            filtered value para recargar los datos de la tabla cuando se realiza algún filtro-->
+            <h:form id="forma">
+                <p:dataTable id="tbl" var="rp" value="#{maestroRolesPermisoManagedBean.arregloRP}" widgetVar="tablaPersona"             
+                             rows="15" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"            
+                             rowsPerPageTemplate="10,20,30,40,50" style="margin-bottom:20px; font-size: 12px">
+                          <f:facet name="header">
+                              Listado de Roles Permisos
+                          </f:facet> 
+
+                    <p:column style="width:10px;text-align: center" >
+                        <p:commandLink action="#{maestroRolesPermisoManagedBean.irAConsultarRolesPermiso()}" title="Consultar" >                        
+                            <f:setPropertyActionListener value="#{rp}" target="#{rolesPermisoManagedBean.rolesPermiso}" />
+                            <i class="fa fa-check"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:10px;text-align: center">
+                        <p:commandLink action="#{maestroRolesPermisoManagedBean.irAEditarRolesPermiso()}" title="Modificar">                        
+                            <f:setPropertyActionListener value="#{rp}" target="#{rolesPermisoManagedBean.rolesPermiso}" />                            
+                            <i class="fa fa-edit"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:10px;text-align: center">
+                        <p:commandLink action="#{maestroRolesPermisoManagedBean.irAEliminarRolesPermiso()}" title="Eliminar">                        
+                            <f:setPropertyActionListener value="#{rp}" target="#{rolesPermisoManagedBean.rolesPermiso}" />                            
+                            <i class="fa fa-trash-o"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:32px" exportable="false" visible="false">
+                        <p:rowEditor />
+                    </p:column>                    
+                    <p:column style="width:22px; font-size: 12px;"  sortBy="#{rp.idRolesPermiso}">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{rp.idRolesPermiso}" />
+                    </p:column>                   
+                    
+                    <p:column style="font-size: 12px;" sortBy="#{rp.rol.nombreRol}" width="90px;">
+                        <f:facet name="header">
+                            <h:outputText value="Rol" />
+                        </f:facet>
+                        <h:outputText value="#{rp.rol.nombreRol}" />
+                    </p:column>
+                    
+                    <p:column style="font-size: 12px;" sortBy="#{rp.permiso.nombrePermiso}" width="90px;">
+                        <f:facet name="header">
+                            <h:outputText value="Permiso" />
+                        </f:facet>
+                        <h:outputText value="#{rp.permiso.nombrePermiso}" />
+                    </p:column>                    
+                    
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

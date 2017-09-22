@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{permisoManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Editar información del Permiso" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">
+
+                        <p:outputLabel value="Nombre del Permiso:"></p:outputLabel>
+                        <p:inputText id="nomPermiso" value="#{permisoManagedBean.permiso.nombrePermiso}" required="true" requiredMessage="Este campo es requerido"></p:inputText>        
+                        <p:message for="nomPermiso"></p:message>      
+
+                        <p:outputLabel value="Descripción del Permiso"></p:outputLabel>
+                        <p:inputText id="url" value="#{permisoManagedBean.permiso.descripcionPermiso}" required="true" requiredMessage="Este campo es requerido"></p:inputText>        
+                        <p:message for="url"></p:message>              
+                                       
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank"> 
+                    <p:commandButton action="#{permisoManagedBean.actualizarPermiso()}" update="forma" value="Guardar"></p:commandButton>
+                    <p:commandButton value="Regresar" immediate="true" action="maestroPermiso"></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

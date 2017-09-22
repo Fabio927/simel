@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form>
+                <p:panel id="pnl" header="Eliminar Persona" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="ID"></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.idPersona}"></p:outputLabel>
+
+                        <p:outputLabel value="Nombres: "></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.nombre}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Apellidos: "></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.apellido}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Cargo: "></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.cargo}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Correo:  "></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.correo}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Clave: "></p:outputLabel>
+                        <p:outputLabel value="#{personaManagedBean.persona.clave}"></p:outputLabel>
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                    <p:commandButton value="Eliminar" action="#{personaManagedBean.eliminarPersona()}" >
+                        <p:confirm header="Confirmación" message="Desea eliminar este Usuario?"  />
+                    </p:commandButton>
+                    <p:commandButton value="Regresar" action="maestroPersona"></p:commandButton>
+                </p:panelGrid>
+
+
+                <div align="center">
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </div>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

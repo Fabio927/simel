@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{rolesPermisoManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Editar información del Rol - Permiso" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">                     
+
+                        <p:outputLabel value="Nombre Rol "> </p:outputLabel>
+                        <p:selectOneMenu id="comboRol" value="#{rolesPermisoManagedBean.rolesSelect}" effect="fade" filter="true" filterMatchMode="contains">                    
+                            <f:selectItems value="#{rolesPermisoManagedBean.rolList}"/>                        
+                        </p:selectOneMenu>
+                        <p:message for="comboRol"> </p:message>
+
+                        <p:outputLabel value="Nombre Permiso"> </p:outputLabel>
+                        <p:selectOneMenu id="comboPermiso" value="#{rolesPermisoManagedBean.permisosSelect}" effect="fade" filter="true" filterMatchMode="contains">                    
+                            <f:selectItems value="#{rolesPermisoManagedBean.permisoList}"/>                        
+                        </p:selectOneMenu>
+                        <p:message for="comboPermiso"> </p:message>
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank"> 
+                    <p:commandButton action="#{rolesPermisoManagedBean.actualizarRolesPermiso()}" update="forma" value="Guardar"></p:commandButton>                    
+                    <p:commandButton value="Regresar" immediate="true" action="maestroRolesPermiso"></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

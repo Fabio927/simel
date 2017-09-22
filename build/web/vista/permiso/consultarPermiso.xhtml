@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+
+            <h:form>
+                <p:panel id="pnl" header="Detalles del Permiso" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="ID: "></p:outputLabel>
+                        <p:outputLabel value="#{permisoManagedBean.permiso.idPermiso}"></p:outputLabel>
+
+                        <p:outputLabel value="Nombre del Permiso"></p:outputLabel>
+                        <p:outputLabel value="#{permisoManagedBean.permiso.nombrePermiso}"></p:outputLabel>                    
+
+                        <p:outputLabel value="Descripción del Permiso"></p:outputLabel>
+                        <p:outputLabel value="#{permisoManagedBean.permiso.descripcionPermiso}"></p:outputLabel>                                                               
+                    </p:panelGrid>
+                </p:panel>
+                <p:commandButton action="maestroPermiso" value="Regresar"></p:commandButton>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

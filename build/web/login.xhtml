@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./baseTemplate.xhtml">
+        <ui:define name="menu">
+        </ui:define>
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" styleClass="mensajeError"/>
+                <div align="center"	style="position: relative; width: 70%; height: 50%;">
+                    <h:outputText value="#{autenticacionManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                    <div style="position: absolute; top: 50%; left: 50%;">
+                        <p:fieldset legend="Bienvenido">
+                            <p:panelGrid columns="3" id="pgDatos" layout="grid"  styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="txtUsuario" value="Usuario"></p:outputLabel>
+                                <p:inputText id="txtUsuario" value="#{autenticacionManagedBean.correo}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                                <p:message for="txtUsuario"></p:message>
+
+                                <p:outputLabel for="txtClave" value="Constraseña"></p:outputLabel>
+                                <p:password id="txtClave" value="#{autenticacionManagedBean.clave}" required="true" requiredMessage="Este campo es requerido"></p:password>
+                                <p:message for="txtClave"></p:message>
+                            </p:panelGrid>
+
+                            <p:commandButton action="#{autenticacionManagedBean.autenticar()}" value="Ingresar" update="forma"></p:commandButton>
+                        </p:fieldset>
+
+            
+
+                    </div> 
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

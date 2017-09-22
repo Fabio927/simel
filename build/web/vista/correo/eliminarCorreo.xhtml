@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form>
+                <p:panel id="pnl" header="Eliminar Correo" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="ID"></p:outputLabel>
+                        <p:outputLabel value="#{correoManagedBean.correo.idCorreo}"></p:outputLabel>
+
+                        <p:outputLabel value="Asunto"></p:outputLabel>
+                        <p:outputLabel value="#{correoManagedBean.correo.asunto}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Para "></p:outputLabel>
+                        <p:outputLabel value="#{correoManagedBean.correo.para}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Mensaje "></p:outputLabel>
+                        <p:outputLabel value="#{correoManagedBean.correo.mensaje}"></p:outputLabel>
+                        
+                        <p:outputLabel value="Enviado por  "></p:outputLabel>
+                        <p:outputLabel value="#{correoManagedBean.correo.persona.nombre} #{correoManagedBean.correo.persona.apellido}"></p:outputLabel>
+                        
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                    <p:commandButton value="Eliminar" action="#{personaManagedBean.eliminarPersona()}" >
+                        <p:confirm header="Confirmación" message="Desea eliminar este Correo?"  />
+                    </p:commandButton>
+                    <p:commandButton value="Regresar" action="maestroCorreo"></p:commandButton>
+                </p:panelGrid>
+
+
+                <div align="center">
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </div>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

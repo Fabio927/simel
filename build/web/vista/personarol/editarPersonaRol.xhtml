@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{personaRolManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Editar información del Usuario - Rol" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">                                 
+
+                        <p:outputLabel value="Rol "> </p:outputLabel>
+                        <p:selectOneMenu id="comboRol" value="#{personaRolManagedBean.rolSelect}" effect="fade" filter="true" filterMatchMode="contains">                    
+                            <f:selectItems value="#{personaRolManagedBean.rolList}"/>                        
+                        </p:selectOneMenu>
+                        <p:message for="comboRol"> </p:message>
+
+                        <p:outputLabel value="Nombre del Usuario"> </p:outputLabel>
+                        <p:selectOneMenu id="comboUsuario" value="#{personaRolManagedBean.personaSelect}" effect="fade" filter="true" filterMatchMode="contains">                    
+                            <f:selectItems value="#{personaRolManagedBean.personaList}"/>
+                        </p:selectOneMenu>
+                        <p:message for="comboUsuario"> </p:message>
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank"> 
+                    <p:commandButton action="#{personaRolManagedBean.actualizarPersonaRol()}" update="forma" value="Guardar"></p:commandButton>                    
+                    <p:commandButton value="Regresar" immediate="true" action="maestroPersonaRol"></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

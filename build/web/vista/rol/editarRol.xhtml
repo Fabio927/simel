@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{rolManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Editar información de Rol" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">                          
+
+                        <p:outputLabel value="Nombre del Rol"></p:outputLabel>
+                        <p:inputText id="nombreRol" value="#{rolManagedBean.rol.nombreRol}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="nombreRol"></p:message>
+
+                        <p:outputLabel value="Descripción del Rol"></p:outputLabel>
+                        <p:inputText id="descRol" value="#{rolManagedBean.rol.descripcionRol}" required="true" requiredMessage="Este campo es requerido"></p:inputText>        
+                        <p:message for="descRol"></p:message>    
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">               
+                    <p:commandButton action="#{rolManagedBean.actualizarRol()}" update="forma" value="Guardar"></p:commandButton>
+                    <p:commandButton value="Regresar" immediate="true" action="maestroRol"></p:commandButton>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

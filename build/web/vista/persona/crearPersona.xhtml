@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message" />
+            <h:form id="forma">
+                <h:outputText value="#{personaManagedBean.error}" styleClass="mensajeError"></h:outputText>
+                <p:panel id="pnl" header="Formulario de Creación de Usuarios" style="margin-bottom:10px; text-align: center">
+                    <p:panelGrid columns="3">
+
+                        <p:outputLabel value="Nombres: "></p:outputLabel>
+                        <p:inputText id="nombres" value="#{personaManagedBean.persona.nombre}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for=" nombres"></p:message>
+                        
+                        <p:outputLabel value="Apellidos:  "></p:outputLabel>
+                        <p:inputText id="apellidos" value="#{personaManagedBean.persona.apellido}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="apellidos"></p:message>
+                        
+                        <p:outputLabel value="Cargo:  "></p:outputLabel>
+                        <p:inputText id="cargo" value="#{personaManagedBean.persona.cargo}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="cargo"></p:message>
+                        
+                        <p:outputLabel value="Correo: "></p:outputLabel>
+                        <p:inputText id="correo" value="#{personaManagedBean.persona.correo}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="correo"></p:message>
+                        
+                        <p:outputLabel value="Contraseña: "></p:outputLabel>
+                        <p:inputText id="pass" value="#{personaManagedBean.persona.clave}" required="true" requiredMessage="Este campo es requerido"></p:inputText>
+                        <p:message for="pass"></p:message>
+                        
+                    </p:panelGrid>
+                </p:panel>
+                
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                    <p:commandButton action="#{personaManagedBean.guardarPersona()}" update="forma" value="Guardar"></p:commandButton>
+                    <p:commandButton value="Regresar" immediate="true" action="maestroPersona"></p:commandButton>
+                </p:panelGrid>  
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

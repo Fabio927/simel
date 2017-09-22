@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="root" value="#{request.contextPath}" />
+    <ui:composition template="#{root}/baseTemplate.xhtml">
+        <ui:define name="content">
+            <p:growl id="message"/>
+            <h:form>
+                <div align="left">
+                    <p:commandButton value="Nuevo" action="#{maestroPermisoManagedBean.irACrearPermiso()}"></p:commandButton>                    
+                </div>
+                <br></br>
+            </h:form>
+
+            <h:form id="forma">
+                <p:dataTable id="tbl" var="permiso" value="#{maestroPermisoManagedBean.arregloPermiso}" widgetVar="tablaeps"
+                             rows="15" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} "
+                             rowsPerPageTemplate="10,20,30" style="margin-bottom:20px">
+                    <f:facet name="header">
+                        Listado de Permisos
+                    </f:facet>
+
+
+                    <p:column style="width:15px;text-align: center" >
+                        <p:commandLink action="#{maestroPermisoManagedBean.irAConsultarPermiso()}" title="Consultar">
+                            <f:setPropertyActionListener value="#{permiso}" target="#{permisoManagedBean.permiso}" />
+                            <i class="fa fa-check"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroPermisoManagedBean.irAEditarPermiso()}" title="Modificar">
+                            <f:setPropertyActionListener value="#{permiso}" target="#{permisoManagedBean.permiso}" />
+                            <i class="fa fa-edit"/>
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column style="width:15px;text-align: center">
+                        <p:commandLink action="#{maestroPermisoManagedBean.irAEliminarPermiso()}" title="Eliminar">
+                            <f:setPropertyActionListener value="#{permiso}" target="#{permisoManagedBean.permiso}" />
+                            <i class="fa fa-trash-o"/>
+                        </p:commandLink>
+                    </p:column>
+
+
+                    <p:column style="width:32px" exportable="false" visible="false">
+                        <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column style="width:15px; font-size: 14px;"  sortBy="#{permiso.idPermiso}">
+                        <f:facet name="header">
+                            <h:outputText value="ID" />
+                        </f:facet>
+                        <h:outputText value="#{permiso.idPermiso}" />
+                    </p:column>
+
+                    <p:column style="font-size: 14px;" sortBy="#{permiso.nombrePermiso}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del Permiso" />
+                        </f:facet>
+                        <h:outputText value="#{permiso.nombrePermiso}"/>
+                    </p:column>         
+                    
+                    <p:column style="font-size: 14px;" sortBy="#{permiso.descripcionPermiso}">
+                        <f:facet name="header">
+                            <h:outputText value="Descripcion del Permiso" />
+                        </f:facet>
+                        <h:outputText value="#{permiso.descripcionPermiso}"/>
+                    </p:column>         
+                    
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
