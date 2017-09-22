@@ -100,4 +100,25 @@ public class PermisoDAO {
             ex.printStackTrace();
         }
     }
+    
+    private int idRol;
+    private String hola;
+
+    public int getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
+    }
+
+    public String getHola() {
+        return hola;
+    }
+
+    public void setHola(String hola) {
+        this.hola = hola;
+    }
+    
+    
 }
