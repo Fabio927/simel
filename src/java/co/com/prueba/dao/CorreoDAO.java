@@ -153,4 +153,25 @@ public class CorreoDAO {
             ex.printStackTrace();
         }
   }
+     
+     private String modificacion;
+     private String prueba;
+
+    public String getModificacion() {
+        return modificacion;
+    }
+
+    public void setModificacion(String modificacion) {
+        this.modificacion = modificacion;
+    }
+
+    public String getPrueba() {
+        return prueba;
+    }
+
+    public void setPrueba(String prueba) {
+        this.prueba = prueba;
+    }
+     
+     
 }
