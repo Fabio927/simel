@@ -154,4 +154,8 @@ public class PersonaDAO {
         } 
          return persona;
     }
+   
+   public void almacenar(){
+       System.out.println("almacenado");
+   }
 }
